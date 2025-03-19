@@ -16,7 +16,6 @@ set(STM32CUBEMX_GENERATED_FILES
         ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
         ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c
         ${CMAKE_CURRENT_LIST_DIR}/../Src/system_stm32f4xx.c
-        ${CMAKE_CURRENT_LIST_DIR}/../Src/sysmem.c
         ${CMAKE_CURRENT_LIST_DIR}/../LoRa_AS32_Lib/Src/LoRa_AS32_lib.c
         ${CMAKE_CURRENT_LIST_DIR}/../startup_stm32f411xe.s)
 
