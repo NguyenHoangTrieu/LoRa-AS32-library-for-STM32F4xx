@@ -1,0 +1,28 @@
+set(STM32CUBEMX_GENERATED_FILES
+        ${CMAKE_CURRENT_LIST_DIR}/../Src/stm32f4xx_it.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Src/stm32f4xx_hal_msp.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Src/system_stm32f4xx.c
+        ${CMAKE_CURRENT_LIST_DIR}/../Src/sysmem.c
+        ${CMAKE_CURRENT_LIST_DIR}/../LoRa_AS32_Lib/Src/LoRa_AS32_lib.c
+        ${CMAKE_CURRENT_LIST_DIR}/../startup_stm32f411xe.s)
+
+set(GLOBAL_INCLUDE_DIRS
+        ${CMAKE_CURRENT_LIST_DIR}/../Inc
+        ${CMAKE_CURRENT_LIST_DIR}/../LoRa_AS32_Lib/Inc
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/STM32F4xx_HAL_Driver/Inc
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/CMSIS/Device/ST/STM32F4xx/Include
+        ${CMAKE_CURRENT_LIST_DIR}/../Drivers/CMSIS/Include)
