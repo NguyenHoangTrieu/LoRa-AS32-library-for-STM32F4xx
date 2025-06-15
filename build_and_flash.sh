@@ -13,4 +13,4 @@ ninja
 PROGRAMMER="/home/trieunguyen/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/STM32_Programmer_CLI"
 echo "[INFO] Flashing firmware..."
 # Flash Node 001
-sudo "$PROGRAMMER" -c port=SWD sn=52FF6F064849825057460467 -w Node_01.bin 0x08000000 -v -rst
+sudo "$PROGRAMMER" -c port=SWD sn=52FF6F064849825057460467 -w Sender_demo.bin 0x08000000 -v -rst
