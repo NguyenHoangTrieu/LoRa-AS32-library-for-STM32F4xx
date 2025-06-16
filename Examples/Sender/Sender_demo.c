@@ -119,9 +119,9 @@ int main(void)
     // uint8_t len = UART_Read(rxBuffer, RX_BUFFER_SIZE, huart1);
     // if (len > 0)
     // {
-      HAL_UART_Transmit(&huart6, (uint8_t*)rxBuffer, len, 100);
-      ClearString(rxBuffer, len);
-      len = 0;
+      HAL_UART_Transmit(&huart6, (uint8_t*)rxBuffer, RX_BUFFER_SIZE, 100);
+      // ClearString(rxBuffer, RX_BUFFER_SIZE);
+      // len = 0;
       HAL_Delay(1000);
     // }
     /* USER CODE BEGIN 3 */
