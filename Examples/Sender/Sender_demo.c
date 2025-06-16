@@ -106,6 +106,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
   uint8_t rxBuffer[RX_BUFFER_SIZE];
   Operation_MODE_Init(GPIOC, GPIOC, GPIO_PIN_8, GPIO_PIN_9, GENERAL_MODE);
+  for (int i = 0; i < RX_BUFFER_SIZE; i++) {
+    rxBuffer[i] = 'A'; // Initialize the buffer to avoid garbage values
+  }
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -113,13 +116,14 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    uint8_t len = UART_Read(rxBuffer, RX_BUFFER_SIZE, huart1);
-    if (len > 0)
-    {
+    // uint8_t len = UART_Read(rxBuffer, RX_BUFFER_SIZE, huart1);
+    // if (len > 0)
+    // {
       HAL_UART_Transmit(&huart6, (uint8_t*)rxBuffer, len, 100);
       ClearString(rxBuffer, len);
       len = 0;
-    }
+      HAL_Delay(1000);
+    // }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
