@@ -25,5 +25,5 @@ echo "---------------------------------------------"
 echo "Available serial ports:"
 ls /dev/ttyUSB*
 
-cd ..
+cd ../../..
 pytest -s test_uart.py
