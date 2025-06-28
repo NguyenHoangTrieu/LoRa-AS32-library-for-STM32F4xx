@@ -23,7 +23,7 @@ echo "---------------------------------------------"
 echo "Available serial ports:"
 echo "---------------------------------------------"
 echo "Available serial ports:"
-ls /dev/tty*
+ls /dev/ttyUSB*
 
 cd ..
 pytest -s test_uart.py
