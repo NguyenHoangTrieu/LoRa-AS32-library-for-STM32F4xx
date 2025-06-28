@@ -91,17 +91,17 @@ def test_uart_read(uart_usb0, uart_usb1, uart_usb2):
 
     # Print results
     if log_0:
-        print("USB0 (Test1):")
+        print("USB0 (Test 1):")
         for entry in log_0:
             print(entry)
 
     if log_1:
-        print("USB1 (Test2):")
+        print("USB1 (Test 2):")
         for entry in log_1:
             print(entry)
 
     if log_2:
-        print("USB2 (Test3):")
+        print("USB2 (Test 3):")
         for entry in log_2:
             print(entry)
 
