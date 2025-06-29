@@ -42,7 +42,7 @@ def uart_usb2():
 
     ser = serial.Serial(port="/dev/ttyUSB2", baudrate=19200, timeout=1)
     print(f"Connected to: {ser.name}")
-    yield ser 
+    yield ser
     ser.close()
 
 @pytest.fixture(scope="module")
