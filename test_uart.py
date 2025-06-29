@@ -19,7 +19,7 @@ def uart_usb0():
         pytest.skip("/dev/ttyUSB0 is not available!")
 
     ser = serial.Serial(port="/dev/ttyUSB0", baudrate=19200, timeout=1)
-    print(f"Connected to: {ser.name}")
+    print(f"Connected to: {ser.name}") 
     yield ser
     ser.close()
 
