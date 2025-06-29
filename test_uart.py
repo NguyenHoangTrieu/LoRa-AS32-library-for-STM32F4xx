@@ -45,7 +45,18 @@ def uart_usb2():
     yield ser
     ser.close()
 
-def test_uart_read(uart_usb0, uart_usb1, uart_usb2):
+@pytest.fixture(scope="module")
+def uart_usb3():
+    """Open /dev/ttyUSB3 (Node_01) at 19200 baud rate if available."""
+    if "/dev/ttyUSB3" not in get_available_ports():
+        pytest.skip("/dev/ttyUSB3 is not available!")
+
+    ser = serial.Serial(port="/dev/ttyUSB3", baudrate=19200, timeout=1)
+    print(f"Connected to: {ser.name}")
+    yield ser
+    ser.close()
+
+def test_uart_read(uart_usb0, uart_usb1, uart_usb2, uart_usb3):
     """Read data from all devices for 60 seconds, group bursts, and print at the end."""
     start_time = time.time()
     timeout = 60  # seconds
@@ -53,11 +64,12 @@ def test_uart_read(uart_usb0, uart_usb1, uart_usb2):
     burst_timeout_0 = 0.01
     burst_timeout_1 = 0.005
     burst_timeout_2 = 0.01
+    burst_timeout_3 = 0.01
 
-    buffer_0, buffer_1, buffer_2 = "", "", ""
-    last_rx_0 = last_rx_1 = last_rx_2 = time.time()
+    buffer_0, buffer_1, buffer_2, buffer_3 = "", "", "", ""
+    last_rx_0 = last_rx_1 = last_rx_2 = last_rx_3 = time.time()
 
-    log_0, log_1, log_2 = [], [], []
+    log_0, log_1, log_2, log_3 = [], [], [], []
 
     while time.time() - start_time < timeout:
         now = time.time()
@@ -89,6 +101,15 @@ def test_uart_read(uart_usb0, uart_usb1, uart_usb2):
             log_2.append(f"[{datetime.now().strftime('%H:%M:%S:%f')[:-3]}] {buffer_2.strip()}")
             buffer_2 = ""
 
+        # USB3 (Node_01)
+        if uart_usb3.in_waiting:
+            data = uart_usb3.read(uart_usb3.in_waiting).decode("utf-8", errors="ignore")
+            buffer_3 += data
+            last_rx_3 = now
+        elif buffer_3 and (now - last_rx_3) > burst_timeout_3:
+            log_3.append(f"[{datetime.now().strftime('%H:%M:%S:%f')[:-3]}] {buffer_3.strip()}")
+            buffer_3 = ""
+
     # Print results
     if log_0:
         print("USB0 (Test 1):")
@@ -103,6 +124,11 @@ def test_uart_read(uart_usb0, uart_usb1, uart_usb2):
     if log_2:
         print("USB2 (Test 3):")
         for entry in log_2:
+            print(entry)
+
+    if log_3:
+        print("USB3 (Test 4):")
+        for entry in log_3:
             print(entry)
 
     print("Data collection complete.")
