@@ -12,7 +12,7 @@ def get_available_ports():
     """Retrieve a list of available serial ports."""
     return [port.device for port in serial.tools.list_ports.comports()]
 
-@pytest.fixture(scope="module") 
+@pytest.fixture(scope="module")
 def uart_usb0():
     """Open /dev/ttyUSB0 (Gateway) at 19200 baud rate if available."""
     if "/dev/ttyUSB0" not in get_available_ports():
