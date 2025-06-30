@@ -56,7 +56,18 @@ def uart_usb3():
     yield ser
     ser.close()
 
-def test_uart_read(uart_usb0, uart_usb1, uart_usb2, uart_usb3):
+    @pytest.fixture(scope="module")
+    def uart_usb4():
+        """Open /dev/ttyUSB4 (Node_03) at 19200 baud rate if available."""
+        if "/dev/ttyUSB4" not in get_available_ports():
+            pytest.skip("/dev/ttyUSB4 is not available!")
+
+        ser = serial.Serial(port="/dev/ttyUSB4", baudrate=19200, timeout=1)
+        print(f"Connected to: {ser.name}")
+        yield ser
+        ser.close()
+
+def test_uart_read(uart_usb0, uart_usb1, uart_usb2, uart_usb3, uart_usb4):
     """Read data from all devices for 60 seconds, group bursts, and print at the end."""
     start_time = time.time()
     timeout = 60  # seconds
@@ -65,11 +76,12 @@ def test_uart_read(uart_usb0, uart_usb1, uart_usb2, uart_usb3):
     burst_timeout_1 = 0.005
     burst_timeout_2 = 0.01
     burst_timeout_3 = 0.01
+    burst_timeout_4 = 0.01
 
-    buffer_0, buffer_1, buffer_2, buffer_3 = "", "", "", ""
-    last_rx_0 = last_rx_1 = last_rx_2 = last_rx_3 = time.time()
+    buffer_0, buffer_1, buffer_2, buffer_3, buffer_4 = "", "", "", "", ""
+    last_rx_0 = last_rx_1 = last_rx_2 = last_rx_3 = last_rx_4 = time.time()
 
-    log_0, log_1, log_2, log_3 = [], [], [], []
+    log_0, log_1, log_2, log_3, log_4 = [], [], [], [], []
 
     while time.time() - start_time < timeout:
         now = time.time()
@@ -110,6 +122,15 @@ def test_uart_read(uart_usb0, uart_usb1, uart_usb2, uart_usb3):
             log_3.append(f"[{datetime.now().strftime('%H:%M:%S:%f')[:-3]}] {buffer_3.strip()}")
             buffer_3 = ""
 
+        # USB4 (Node_03)
+        if uart_usb4.in_waiting:
+            data = uart_usb4.read(uart_usb4.in_waiting).decode("utf-8", errors="ignore")
+            buffer_4 += data
+            last_rx_4 = now
+        elif buffer_4 and (now - last_rx_4) > burst_timeout_4:
+            log_4.append(f"[{datetime.now().strftime('%H:%M:%S:%f')[:-3]}] {buffer_4.strip()}")
+            buffer_4 = ""
+
     # Print results
     if log_0:
         print("USB0 (Test 1):")
@@ -129,6 +150,11 @@ def test_uart_read(uart_usb0, uart_usb1, uart_usb2, uart_usb3):
     if log_3:
         print("USB3 (Test 4):")
         for entry in log_3:
+            print(entry)
+
+    if log_4:
+        print("USB4 (Test 5):")
+        for entry in log_4:
             print(entry)
 
     print("Data collection complete.")
