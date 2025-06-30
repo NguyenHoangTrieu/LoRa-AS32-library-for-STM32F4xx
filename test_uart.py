@@ -56,16 +56,16 @@ def uart_usb3():
     yield ser
     ser.close()
 
-    @pytest.fixture(scope="module")
-    def uart_usb4():
-        """Open /dev/ttyUSB4 (Node_03) at 19200 baud rate if available."""
-        if "/dev/ttyUSB4" not in get_available_ports():
-            pytest.skip("/dev/ttyUSB4 is not available!")
+@pytest.fixture(scope="module")
+def uart_usb4():
+    """Open /dev/ttyUSB4 (Node_03) at 19200 baud rate if available."""
+    if "/dev/ttyUSB4" not in get_available_ports():
+        pytest.skip("/dev/ttyUSB4 is not available!")
 
-        ser = serial.Serial(port="/dev/ttyUSB4", baudrate=19200, timeout=1)
-        print(f"Connected to: {ser.name}")
-        yield ser
-        ser.close()
+    ser = serial.Serial(port="/dev/ttyUSB4", baudrate=19200, timeout=1)
+    print(f"Connected to: {ser.name}")
+    yield ser
+    ser.close()
 
 def test_uart_read(uart_usb0, uart_usb1, uart_usb2, uart_usb3, uart_usb4):
     """Read data from all devices for 60 seconds, group bursts, and print at the end."""
