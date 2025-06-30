@@ -19,8 +19,8 @@ sudo "$PROGRAMMER" -c port=SWD sn=52FF71064849825056350467 -w Sender_demo.bin 0x
 sudo "$PROGRAMMER" -c port=SWD sn=52FF6D064849825053310667 -w Sender_demo.bin 0x08000000 -v -rst 
 sudo "$PROGRAMMER" -c port=SWD sn=52FF6E064849825043360667 -w Sender_demo.bin 0x08000000 -v -rst
 sudo "$PROGRAMMER" -c port=SWD sn=52FF6C064849825033360667 -w Sender_demo.bin 0x08000000 -v -rst
-sudo "$ESPFLASH" flash /home/esp_rust/hello_world/target/riscv32imc-esp-espidf/release/esp32c3_with_std --chip esp32c3 --baud 460800 --port /dev/ttyACM0
-sudo "$ESPFLASH" flash /home/esp_rust/hello_world/target/riscv32imc-esp-espidf/release/esp32c3_with_std --chip esp32c3 --baud 460800 --port /dev/ttyACM1
+sudo "$ESPFLASH" flash /home/trieunguyen/esp_rust/esp32c3_with_std/target/riscv32imc-esp-espidf/debug/esp32c3_with_std --chip esp32c3 --baud 460800 --port /dev/ttyACM0
+sudo "$ESPFLASH" flash /home/trieunguyen/esp_rust/esp32c3_with_std/target/riscv32imc-esp-espidf/debug/esp32c3_with_std --chip esp32c3 --baud 460800 --port /dev/ttyACM1
 # List available serial ports
 echo "---------------------------------------------"
 echo "Available serial ports:"
